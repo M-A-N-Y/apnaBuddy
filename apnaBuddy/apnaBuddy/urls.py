@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,5 +23,7 @@ urlpatterns = [
     path('student/', include('student.urls')),
     path('committee/', include('committee.urls')),
     path('canteen/', include('canteen.urls')),
+    path('',views.home,name='apna-home'),
+    path('select/',views.select,name='select'),
 
 ]
