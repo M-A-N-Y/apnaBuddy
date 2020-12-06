@@ -29,3 +29,5 @@ urlpatterns = [
     path('select/',views.select,name='select'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
