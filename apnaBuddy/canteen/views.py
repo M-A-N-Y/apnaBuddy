@@ -8,7 +8,11 @@ from .models import *
 
 # Create your views here.
 def index(request):
-	return render(request, 'canteen/index.html')
+    foo = Menu.objects.all()
+    print(foo)
+    context = {'foo' : foo}
+    print(context)
+    return render(request, 'canteen/index.html', context)
 
 def canteen_login(request):
     if request.method == 'POST':

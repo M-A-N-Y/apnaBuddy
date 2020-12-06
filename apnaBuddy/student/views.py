@@ -8,7 +8,20 @@ from .models import *
 
 # Create your views here.
 def index(request):
-	return render(request, 'student/index.html')
+	foo = Student.objects.all()
+	print(foo)
+	context = {'foo' : foo}
+	print(context)
+	return render(request, 'student/index.html', context)
+	# return render(request, 'student/index.html')
+
+def getter(request) :
+	foo = Student.objects.all()
+	print(foo)
+	context = {'foo' : foo}
+	print(context)
+	return render(request, 'student/index.html', context)
+
 
 def student_login(request):
 	if request.method == 'POST':

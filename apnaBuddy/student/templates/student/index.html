@@ -1,11 +1,64 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>LOGIN SUCCESSFUL</title>
-</head>
-<body>
+    <style>
+        body {
+            background-color: midnightblue;
+            color: white;
+            text-align: center;
+        }
+        .cent {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .carder {
+            border: 2px solid #000000;
+            border-radius: 15px;
+            margin: auto;
+            margin-top: 50px;
+            padding: 15px;
+            background: linear-gradient(35deg, slategray, silver, slategray);
+            color: black;
+        }
+        .card {
+            border: 2px solid #000000;
+            border-radius: 15px;
+            margin: auto;
+            width: 30%;
+            padding: 15px;
+            background: linear-gradient(35deg, slategray, silver, slategray);
+            color: black;
+        }
+        table, td, th {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            border-right: none;
+            border-left: none;
+            border-top: none;
+        }
+        .shad {
+            font-size: 60px;
+            text-shadow: 0 0 8px white;
+        }
+        .shadS {
+            font-size: 30px;
+            text-shadow: 0 0 8px white;
+        }
+    </style>
+    <head>
+        <title>Portfolio</title>
+    </head>
+    <body>
+        <h2 class="shad">Portfolio</h2>
 
-<h1>KHUSH ho ja bhai!</h1>
+        {% for too in foo %}
+	        <div class="card">
+	            <p>{{ too.name }}</p>
+	            <p>{{ too.uid }}</p>
+	        </div>
+	    {% endfor %}
 
-</body>
+    </body>
 </html>
