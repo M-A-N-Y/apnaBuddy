@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Student(models.Model):
@@ -13,6 +15,7 @@ class Student(models.Model):
 		('PHD-CS','PHD-CS'),
 		('PHD-EXTC','PHD-EXTC'),
 	)
+	user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE,related_name="student")
 	name = models.CharField(max_length=50,null=True)
 	phone = models.CharField(max_length=10,null=True,blank=True)
 	spitcoin = models.FloatField(default=0)
