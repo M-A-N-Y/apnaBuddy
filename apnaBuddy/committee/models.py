@@ -1,7 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 class Committee(models.Model) :
+	is_committee = models.BooleanField(default=True)
+	user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE,related_name="committee")
 	name = models.CharField(max_length = 100)
 	about = models.TextField(max_length = 100)
 	icon = models.ImageField(null=True, blank = True)

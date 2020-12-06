@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Teacher(models.Model):
@@ -14,6 +15,9 @@ class Teacher(models.Model):
 		('PHD-EXTC','PHD-EXTC'),
 	)
 
+
+    is_teacher = models.BooleanField(default=True)
+    user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE,related_name="teacher")
     name = models.CharField(max_length=50,null=True)
     phone = models.CharField(max_length=10,null=True,blank=True)
     spitcoin = models.FloatField(default=0)
