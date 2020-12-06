@@ -57,7 +57,7 @@
 	        <div class="card">
 	            <p>{{ too.name }}</p>
 	            <p>{{ too.price }}</p>
-	            <img src='/static/images' + {{ too.pic }} alt="{{too.name}}">{{ too.pic }}</img>
+	            <img src='{{ too.pic.url }}' alt="{{too.name}}"></img>
 	            <p>{{ too.category }}</p>
 	        </div>
 	    {% endfor %}

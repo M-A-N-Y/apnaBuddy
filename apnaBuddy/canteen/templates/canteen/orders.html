@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+{% load static %}
+
+
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Payment History</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href='{%static "css/bootstrap.css"%}' rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href='{%static "css/mdb.css"%}' rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href='{%static "css/style.css"%}' rel="stylesheet">
+  <style type="text/css">
+    html,
+    body {
+    padding-top:50px;
+    }
+    header,
+    .carousel {
+      height: 60vh;
+    }
+
+    @media (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+    .card {
+      opacity: 0.6;
+      transition: 0.3s;
+    }
+    .card:hover {opacity: 1}
+
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+  </style>
+</head>
+{% include "navbar.html" %}
+<body>
+
+
+
+
+  <!--Main layout-->
+  <main>
+
+    <div class="container">
+        <h4> <strong> Transaction History: </strong> </h4><br>
+<!--        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h5 class="card-title">Warning card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>-->
+    <div class="row wow fadeIn">
+        {% for order,k,tot,onum,ordered in items %}
+      <div class="col-lg-3 col-md-6 mb-4">
+
+        <section>
+            <div class="card">
+                {% if ordered %}
+              <div class="card-header text-white bg-success text-center py-3">
+                {% else %}
+              <div class="card-header text-white bg-danger text-center py-3">
+                {% endif %}
+
+                <h5 class="mb-0 font-weight-bold">Order:{{onum}}</h5>
+
+              </div>
+
+              <div class="card-body" style="height: 12rem;">
+                <ul>
+                    {% for item in k %}
+                  <li><strong> {{ item.medicine_id.name }} </strong> ({{ item.qty }} units) </li>
+                    {% endfor %}
+                </ul>
+              </div>
+
+              <div class="card-footer bg-white d-flex justify-content-between py-3">
+                <strong>Total amount:</strong>
+                <strong><span>&#8377;</span>{{ tot }}</strong>
+              </div>
+            </div>
+        </section>
+
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+  </main>
+  <!--Main layout-->
+{% include "footer.html" %}
+
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src='{% static "js/jquery-3.4.1.min.js"%}'></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src='{% static "js/popper.min.js"%}'></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src='{% static "js/bootstrap.min.js"%}'></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src='{% static "js/mdb.min.js" %}'></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+
+  <script>
+
+    //find out the cart item from local storage
+    if(localStorage.getItem('cart')==null){
+      var cart={};
+    }
+    else
+    {
+      cart = JSON.parse(localStorage.getItem('cart'));
+      var sum = 0;
+      for(var item in cart){
+          sum = sum + cart[item][0];
+      }
+      document.getElementById('kart').innerHTML=sum;
+      updateKart(cart);
+    }
+
+    //to increment the item in cart
+
+    $('.divpr').on('click','button.cart',function(){
+    var idstr = this.id.toString();
+    if(cart[idstr] != undefined){
+      cart[idstr][0] = cart[idstr][0] + 1;
+    }
+    else{
+      qty = 1;
+      name = document.getElementById('name'+idstr).innerHTML;
+      cart[idstr] =[qty,name];
+    }
+
+    //Display and update cart
+    console.log(cart);
+    updateKart(cart);
+    localStorage.setItem('cart',JSON.stringify(cart));
+    });
+
+    $('#popkart').popover();
+    document.getElementById("popkart").setAttribute('data-content','<h5>Kart for your element!</h5><div class="mx-2 my-2">');
+    updatePopover(cart);
+
+    function updatePopover(cart) {
+        var popStr="";
+        popStr = popStr+"<h5>Kart for item in your shopping cart</h5><div class='mx-2 my-2'>";
+        var i = 1;
+        for(var item in cart){
+            popStr = popStr + "<b>"+i+". </b>";
+            popStr = popStr + document.getElementById('name'+item).innerHTML.slice(0,9)+"...  Qty: "+cart[item][0]+"<br>";
+            i =i+1;
+        }
+    popStr = popStr + "</div> <br> <a href='/checkout-page'><button class='btn btn-md btn-primary mx-2px' id='checkout'>CheckOut</button></a>  <button class='btn btn-md btn-primary' onclick='clearkart()' id='clearCart'>Clear Kart</button>";
+    //console.log(popStr);
+    document.getElementById('popkart').setAttribute('data-content',popStr);
+    $('#popkart').popover('enable')
+     {
+      var myDefaultWhiteList = $.fn.tooltip.Constructor.Default.whiteList
+      myDefaultWhiteList.button = ['onclick']
+     };
+    }
+
+    function clearkart() {
+        console.log("clearrr");
+        cart = JSON.parse(localStorage.getItem('cart'));
+        localStorage.clear();
+        cart={};
+        updateKart(cart);
+    }
+
+     function updateKart(cart){
+            var sum = 0;
+            for(var item in cart){
+              console.log(item);
+                sum = sum + cart[item][0];
+                //document.getElementById('div'+item).innerHTML= "OK";
+                //document.getElementById('div'+item).innerHTML= "<button id='minus" +item+ "' class='btn btn-md btn-primary minus'>-</button> <span id='val" +item+ "'>" +cart[item][0]+ "</span> <button id='plus" +item+ "' class='btn btn-md btn-primary plus'>+</button>";
+            }
+            localStorage.setItem('cart',JSON.stringify(cart));
+            document.getElementById('kart').innerHTML=sum;
+            updatePopover(cart);
+        }
+
+
+
+  </script>
+
+
+</body>
+
+</html>

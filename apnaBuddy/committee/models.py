@@ -18,6 +18,7 @@ class Committee(models.Model) :
 class Events(models.Model) :
 	name = models.ForeignKey(Committee, on_delete= models.CASCADE, null=True)
 	headline = models.TextField(max_length = 100)
+	desc = models.TextField(max_length = 2000, default='')
 	dop = models.DateTimeField(default = timezone.now)
 	cost = models.FloatField(default = 0)
 	regLink = models.URLField(max_length = 200)

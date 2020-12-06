@@ -39,3 +39,8 @@ def committee_logout(request):
     logout(request)
     messages.success(request,'Successfully logged out')
     return redirect("/")
+
+def events(request):
+    eve = Events.objects.all()
+    params = {'eve':eve}
+    return render(request,'committee/events.html',params)
