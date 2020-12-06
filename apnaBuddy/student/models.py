@@ -69,7 +69,10 @@ class Academic(models.Model):
 	cgpa2 = models.FloatField(null=True,blank=True)
 	cgpa3 = models.FloatField(null=True,blank=True)
 	cgpa4 = models.FloatField(null=True,blank=True)
-	cgpa = models.FloatField(null=True)
+	cgpa5 = models.FloatField(null=True,blank=True)
+	cgpa6 = models.FloatField(null=True,blank=True)
+	cgpa7 = models.FloatField(null=True,blank=True)
+	cgpa8 = models.FloatField(null=True,blank=True)
 	def __str__(self):
 		return str(self.student)
 
