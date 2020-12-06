@@ -7,8 +7,8 @@ class Manager(models.Model):
 	phone = models.CharField(max_length=10,null=True)
 	balance = models.FloatField(default=0)
 	email = models.EmailField(null=False)
-	profile_pic = models.ImageField(null=True)
-	
+	profile_pic = models.ImageField(null=True, blank = True)
+
 	def __str__(self):
 		return self.name
 
@@ -18,10 +18,10 @@ class Menu(models.Model):
 			('lunch', 'lunch'),
 			('breakfast', 'breakfast'),
 			('snack', 'snack'),
-			) 
+			)
 	name = models.CharField(max_length=50,null=True)
 	price = models.FloatField(default=0)
-	pic = models.ImageField(null=True)
+	pic = models.ImageField(null=True,blank = True)
 	category = models.CharField(max_length=50,null=True,choices=CAT)
 
 	def __str__(self):
