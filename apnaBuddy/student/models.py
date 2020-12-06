@@ -55,7 +55,7 @@ class Academic(models.Model):
 
 
 class Subject(models.Model):
-	year = models.IntField(default=1)
+	year = models.IntegerField(default=1)
 	sub1 = models.FloatField(null=True) 
 	sub2 = models.FloatField(null=True) 
 	sub3 = models.FloatField(null=True) 
