@@ -26,6 +26,7 @@ def student_login(request):
 					return redirect('/')
 					#return render(request,'student/index.html')
 			except:
+				messages.add_message(request, messages.INFO, 'You have successfully updated your listing.')
 				messages.error(request,"Wrong credentials,Please try again !")
 				return render(request,'student/login2.html')
 		else:
