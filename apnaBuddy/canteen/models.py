@@ -1,8 +1,10 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Manager(models.Model):
+	is_manager = models.BooleanField(default=True)
+	user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE,related_name="manager")
 	name = models.CharField(max_length=50,null=True)
 	phone = models.CharField(max_length=10,null=True)
 	balance = models.FloatField(default=0)

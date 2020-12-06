@@ -10,28 +10,32 @@ from .models import *
 def index(request):
 	return render(request, 'canteen/index.html')
 
-def login(request):
-	pass
-	'''
-	if request.method=="POST":
-        loginusername=request.POST.get('loginusername')
-        loginpassword=request.POST.get('loginpassword')
+def canteen_login(request):
+    if request.method == 'POST':
+        username=request.POST
+        loginusername=request.POST.get('user')
+        loginpassword=request.POST.get('password')
+        print(loginpassword,loginusername)
         user=authenticate(username=loginusername,password=loginpassword)
+        print(user)
         if user is not None:
-            if Belongs.objects.get(user = user).is_ngo:
-                login(request,user)
-                messages.success(request,"Successfully Logged in")
-                return render(request,'canteen/loginpage.html')
-            else:
+            try:
+                if Manager.objects.get(user = user).is_manager == True:
+                    login(request,user)
+                    messages.success(request,"Successfully Logged in")
+                    return redirect('/')
+                    #return render(request,'student/index.html')
+            except:
                 messages.error(request,"Wrong credentials,Please try again !")
-                return render(request,'canteen/login.html')
+                #return redirect('/canteen/')
+                return render(request,'canteen/index.html')
         else:
             messages.error(request,"Wrong credentials,Please try again !")
-            return render(request,'canteen/login.html')
+            return render(request,'canteen/login2.html')
     else:
         messages.success(request,"You need to login to access this")
-        return render(request,'canteen/login.html')
-	'''
+        return render(request,'canteen/login2.html')
+
 
 def logout_u(request):
     logout(request)

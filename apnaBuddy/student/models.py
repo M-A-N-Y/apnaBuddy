@@ -15,6 +15,7 @@ class Student(models.Model):
 		('PHD-CS','PHD-CS'),
 		('PHD-EXTC','PHD-EXTC'),
 	)
+	is_student = models.BooleanField(default=True)
 	user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE,related_name="student")
 	name = models.CharField(max_length=50,null=True)
 	phone = models.CharField(max_length=10,null=True,blank=True)
@@ -29,7 +30,12 @@ class Student(models.Model):
 	def __str__(self):
 		return self.name+' ('+self.uid+')'
 
-
+class Belongs(models.Model):
+	user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE,related_name="belongs")
+	is_student = models.BooleanField(default=False)
+	is_teacher = models.BooleanField(default = False)	
+	is_manager = models.BooleanField(default=False)
+	is_committee = models.BooleanField(default = False)
 
 
 class LostProperty(models.Model):
