@@ -1,0 +1,66 @@
+.
+├── apnaBuddy
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-38.pyc
+│   │   └── settings.cpython-38.pyc
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── canteen
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── templates
+│   │   └── canteen
+│   │       └── index.html
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── committee
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── templates
+│   │   └── committee
+│   │       └── index.html
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── manage.py
+├── op
+├── student
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── templates
+│   │   └── student
+│   │       └── index.html
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+└── teacher
+    ├── __init__.py
+    ├── admin.py
+    ├── apps.py
+    ├── migrations
+    │   └── __init__.py
+    ├── models.py
+    ├── templates
+    │   └── teacher
+    │       └── index.html
+    ├── tests.py
+    ├── urls.py
+    └── views.py
+
+18 directories, 45 files
