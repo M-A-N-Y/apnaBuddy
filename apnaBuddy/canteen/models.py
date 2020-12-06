@@ -8,6 +8,10 @@ class Manager(models.Model):
 	balance = models.FloatField(default=0)
 	email = models.EmailField(null=False)
 	profile_pic = models.ImageField(null=True)
+	
+	def __str__(self):
+		return self.name
+
 
 class Menu(models.Model):
 	CAT = (
@@ -20,9 +24,15 @@ class Menu(models.Model):
 	pic = models.ImageField(null=True)
 	category = models.CharField(max_length=50,null=True,choices=CAT)
 
+	def __str__(self):
+		return self.name
+
+
 class Order(models.Model):
 	#onum = models.AutoField()
 	#customer = models.ForeignKey(Student, on_delete= models.SET_NULL, null=True)
 	canteen = models.ForeignKey(Manager, on_delete= models.SET_NULL, null=True)
 	item = models.ForeignKey(Menu,on_delete=models.SET_NULL,null=True)
 	delivered = models.BooleanField(default=False)
+	# def __str__(self):
+	# 	return self.name
