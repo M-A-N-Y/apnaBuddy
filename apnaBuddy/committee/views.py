@@ -22,15 +22,20 @@ def committee_login(request):
                 if Committee.objects.get(user = user).is_committee == True:
                     login(request,user)
                     messages.success(request,"Successfully Logged in")
-                    return redirect('/')
+                    return redirect('/committee')
                     #return render(request,'student/index.html')
             except:
                 messages.error(request,"Wrong credentials,Please try again !")
                 #return redirect('/canteen/')
-                return render(request,'committee/index.html')
+                return render(request,'committee/login2.html')
         else:
             messages.error(request,"Wrong credentials,Please try again !")
             return render(request,'committee/login2.html')
     else:
         messages.success(request,"You need to login to access this")
         return render(request,'committee/login2.html')
+
+def committee_logout(request):
+    logout(request)
+    messages.success(request,'Successfully logged out')
+    return redirect("/")

@@ -23,12 +23,12 @@ def canteen_login(request):
                 if Manager.objects.get(user = user).is_manager == True:
                     login(request,user)
                     messages.success(request,"Successfully Logged in")
-                    return redirect('/')
+                    return redirect('/canteen')
                     #return render(request,'student/index.html')
             except:
                 messages.error(request,"Wrong credentials,Please try again !")
                 #return redirect('/canteen/')
-                return render(request,'canteen/index.html')
+                return render(request,'canteen/login2.html')
         else:
             messages.error(request,"Wrong credentials,Please try again !")
             return render(request,'canteen/login2.html')
@@ -37,10 +37,10 @@ def canteen_login(request):
         return render(request,'canteen/login2.html')
 
 
-def logout_u(request):
+def canteen_logout(request):
     logout(request)
     messages.success(request,'Successfully logged out')
-    return redirect("canteen/orders")
+    return redirect("/")
 
 def orders(request):
 	pass

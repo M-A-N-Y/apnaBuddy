@@ -23,7 +23,7 @@ def student_login(request):
 				if Student.objects.get(user = user).is_student:
 					login(request,user)
 					messages.success(request,"Successfully Logged in")
-					return redirect('/')
+					return redirect('/student')
 					#return render(request,'student/index.html')
 			except:
 				messages.add_message(request, messages.INFO, 'You have successfully updated your listing.')
@@ -38,7 +38,10 @@ def student_login(request):
 
 
 
-
+def student_logout(request):
+	logout(request)
+	messages.success(request,'Successfully logged out')
+	return redirect("/")
 
 
 

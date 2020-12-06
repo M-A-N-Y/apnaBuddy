@@ -22,15 +22,20 @@ def teacher_login(request):
                 if Teacher.objects.get(user = user).is_teacher == True:
                     login(request,user)
                     messages.success(request,"Successfully Logged in")
-                    return redirect('/')
+                    return redirect('/teacher')
                     #return render(request,'student/index.html')
             except:
                 messages.error(request,"Wrong credentials,Please try again !")
                 #return redirect('/canteen/')
-                return render(request,'teacher/index.html')
+                return render(request,'teacher/login2.html')
         else:
             messages.error(request,"Wrong credentials,Please try again !")
             return render(request,'teacher/login2.html')
     else:
         messages.success(request,"You need to login to access this")
         return render(request,'teacher/login2.html')
+
+def teacher_logout(request):
+    logout(request)
+    messages.success(request,'Successfully logged out')
+    return redirect("/")
