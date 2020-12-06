@@ -56,6 +56,14 @@ def student_logout(request):
 	messages.success(request,'Successfully logged out')
 	return redirect("/")
 
+def academics(request):
+	student = Student.objects.get(user=request.user)
+	acad = Academic.objects.get(student=student)
+	subject = Subject.objects.get(branch=student.branch,year=student.year)
+
+	params={'student':student,'acad':acad,'subject':subject}
+
+	return render(request,'student/academic.html',params)
 
 
 	# 	if user is not None:
