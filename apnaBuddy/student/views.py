@@ -8,10 +8,9 @@ from .models import *
 
 # Create your views here.
 def index(request):
-	foo = Student.objects.all()
-	print(foo)
-	context = {'foo' : foo}
-	print(context)
+	student = Student.objects.get(user=request.user)
+	context = {'student':student}
+	#print(context)
 	return render(request, 'student/index.html', context)
 	# return render(request, 'student/index.html')
 
