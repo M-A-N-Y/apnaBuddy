@@ -40,9 +40,9 @@ class Portfolio(models.Model):
 	student = models.ForeignKey(Student, on_delete= models.SET_NULL, null=True)
 	intro = models.CharField(max_length=500,null=True)
 	about = models.TextField(null=True)
-	linkedin = models.CharField(max_length=50,null=True) 
-	github = models.CharField(max_length=50,null=True) 
-	resume_link = models.CharField(max_length=500,null=True) 
+	linkedin = models.URLField(max_length=50,null=True, blank=True) 
+	github = models.URLField(max_length=50,null=True, blank=True) 
+	resume_link = models.URLField(max_length=500,null=True, blank=True) 
 	def __str__(self):
 		return str(self.student)
 
