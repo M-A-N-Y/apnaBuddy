@@ -39,7 +39,7 @@
 				<h2>Cart</h2>
 				<span class="cd-cart__undo">Item removed. <a href="#0">Undo</a></span>
 			</header>
-			
+
 			<div class="cd-cart__body">
 				<ul>
 					<!-- products added to the cart will be inserted here using JavaScript -->
@@ -89,7 +89,7 @@
 				event.preventDefault();
 				toggleCart();
 			});
-			
+
 			cart[0].addEventListener('click', function(event) {
 				if(event.target == cart[0]) { // close cart when clicking on bg layer
 					toggleCart(true);
@@ -129,7 +129,7 @@
 			var cartIsEmpty = Util.hasClass(cart[0], 'cd-cart--empty');
 			//update cart product list
 			addProduct(this);
-			//update number of items 
+			//update number of items
 			updateCartCount(cartIsEmpty);
 			//update total price
 			updateCartTotal(this.getAttribute('data-price'), true);
@@ -139,7 +139,7 @@
 
 		function toggleCart(bool) { // toggle cart visibility
 			var cartIsOpen = ( typeof bool === 'undefined' ) ? Util.hasClass(cart[0], 'cd-cart--open') : bool;
-		
+
 			if( cartIsOpen ) {
 				Util.removeClass(cart[0], 'cd-cart--open');
 				//reset undo
@@ -170,7 +170,7 @@
 		function removeProduct(product) {
 			if(cartTimeoutId) clearInterval(cartTimeoutId);
 			removePreviousProduct(); // prduct previously deleted -> definitively remove it from the cart
-			
+
 			var topPosition = product.offsetTop,
 				productQuantity = Number(product.getElementsByTagName('select')[0].value),
 				productTotPrice = Number((product.getElementsByClassName('cd-cart__price')[0].innerText).replace('Rs. ', '')) * productQuantity;
@@ -199,7 +199,7 @@
 			if( typeof quantity === 'undefined' ) {
 				var actual = Number(cartCountItems[0].innerText) + 1;
 				var next = actual + 1;
-				
+
 				if( emptyCart ) {
 					cartCountItems[0].innerText = actual;
 					cartCountItems[1].innerText = next;
@@ -223,7 +223,7 @@
 			} else {
 				var actual = Number(cartCountItems[0].innerText) + quantity;
 				var next = actual + 1;
-				
+
 				cartCountItems[0].innerText = actual;
 				cartCountItems[1].innerText = next;
 				animatingQuantity = false;
@@ -256,7 +256,7 @@
 // Utility function
 function Util () {};
 
-/* 
+/*
 	class manipulation functions
 */
 Util.hasClass = function(el, className) {
@@ -273,7 +273,7 @@ Util.addClass = function(el, className) {
 
 Util.removeClass = function(el, className) {
 	var classList = className.split(' ');
-	if (el.classList) el.classList.remove(classList[0]);	
+	if (el.classList) el.classList.remove(classList[0]);
 	else if(Util.hasClass(el, classList[0])) {
 		var reg = new RegExp('(\\s|^)' + classList[0] + '(\\s|Rs.)');
 		el.className=el.className.replace(reg, ' ');
@@ -292,7 +292,7 @@ Util.setAttributes = function(el, attrs) {
   }
 };
 
-/* 
+/*
   DOM manipulation
 */
 Util.getChildrenByClassName = function(el, className) {
@@ -304,15 +304,15 @@ Util.getChildrenByClassName = function(el, className) {
   return childrenByClass;
 };
 
-/* 
+/*
 	Animate height of an element
 */
 Util.setHeight = function(start, to, element, duration, cb) {
 	var change = to - start,
 	    currentTime = null;
 
-  var animateHeight = function(timestamp){  
-    if (!currentTime) currentTime = timestamp;         
+  var animateHeight = function(timestamp){
+    if (!currentTime) currentTime = timestamp;
     var progress = timestamp - currentTime;
     var val = parseInt((progress/duration)*change + start);
     // console.log(val);
@@ -323,22 +323,22 @@ Util.setHeight = function(start, to, element, duration, cb) {
     	cb();
     }
   };
-  
+
   //set the height of the element before starting animation -> fix bug on Safari
   element.setAttribute("style", "height:"+start+"px;");
   window.requestAnimationFrame(animateHeight);
 };
 
-/* 
+/*
 	Smooth Scroll
 */
 
 Util.scrollTo = function(final, duration, cb) {
   var start = window.scrollY || document.documentElement.scrollTop,
       currentTime = null;
-      
+
   var animateScroll = function(timestamp){
-  	if (!currentTime) currentTime = timestamp;        
+  	if (!currentTime) currentTime = timestamp;
     var progress = timestamp - currentTime;
     if(progress > duration) progress = duration;
     var val = Math.easeInOutQuad(progress, start, final-start, duration);
@@ -353,7 +353,7 @@ Util.scrollTo = function(final, duration, cb) {
   window.requestAnimationFrame(animateScroll);
 };
 
-/* 
+/*
   Focus utility classes
 */
 
@@ -367,7 +367,7 @@ Util.moveFocus = function (element) {
   }
 };
 
-/* 
+/*
   Misc
 */
 
@@ -384,7 +384,7 @@ Util.cssSupports = function(property, value) {
   }
 };
 
-/* 
+/*
 	Polyfills
 */
 //Closest() method
@@ -399,7 +399,7 @@ if (!Element.prototype.closest) {
 		do {
 			if (el.matches(s)) return el;
 			el = el.parentElement || el.parentNode;
-		} while (el !== null && el.nodeType === 1); 
+		} while (el !== null && el.nodeType === 1);
 		return null;
 	};
 }
@@ -419,7 +419,7 @@ if ( typeof window.CustomEvent !== "function" ) {
   window.CustomEvent = CustomEvent;
 }
 
-/* 
+/*
 	Animation curves
 */
 Math.easeInOutQuad = function (t, b, c, d) {
