@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from .models import *
+from student.models import Student
 
 # Create your views here.
 def index(request):
@@ -44,3 +45,26 @@ def events(request):
     eve = Events.objects.all()
     params = {'eve':eve}
     return render(request,'committee/events.html',params)
+
+def payment(request,pk):
+    output=''
+    user = request.user
+    student = Student.objects.get(user=request.user)
+    event = Events.objects.get(id=pk)
+    # if event.paid.objects.get(student=student) is not None:
+    #     output = 'You are already registered!!'
+    if (student.spitcoin - event.cost>0) :
+        event.name.balance += event.cost
+        student.spitcoin -= event.cost
+        event.paid.add(student)
+        student.save()
+        event.name.save()
+        event.save()
+        output = 'TRANSACTION SUCESSFUL'
+        print("\n\n\n\n OK success!")
+
+    else:
+        output = 'TRANSACTION FAILED'
+        print('\n\n\n\npayment failed')
+    params = {'output':output,'balance':student.spitcoin}
+    return render(request,'committee/payment.html',params)

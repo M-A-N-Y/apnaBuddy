@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from student.models import Student
 
 class Committee(models.Model) :
 	is_committee = models.BooleanField(default=True)
@@ -22,5 +23,7 @@ class Events(models.Model) :
 	dop = models.DateTimeField(default = timezone.now)
 	cost = models.FloatField(default = 0)
 	regLink = models.URLField(max_length = 200)
+	paid = models.ManyToManyField(Student, null=True,blank=True)
 	def __str__(self):
 		return str(self.name)
+
