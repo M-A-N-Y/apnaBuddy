@@ -25,7 +25,7 @@
   </ul>
   <div class="card-body">
   	<a href="{{event.regLink}}" class="card-link"><button class="btn btn-dark">Register</button></a>
-    <a href="#" class="card-link"><button class="btn btn-success">Pay</button></a>
+    <a href="{% url 'payment' event.id %}" class="card-link"><button class="btn btn-success">Pay</button></a>
 
   </div>
 </div>
