@@ -12,7 +12,7 @@ def index(request):
     print(foo)
     context = {'foo' : foo}
     print(context)
-    return render(request, 'canteen/index.html', context)
+    return render(request, 'canteen/temp.html', context)
 
 def canteen_login(request):
     if request.method == 'POST':
@@ -45,6 +45,11 @@ def canteen_logout(request):
     logout(request)
     messages.success(request,'Successfully logged out')
     return redirect("/")
+
+def bill(request) :
+    messages.success(request,"Bill Payment successful.")
+    # return redirect('/')
+    return render(request, 'canteen/bill.html')
 
 def orders(request):
 	pass

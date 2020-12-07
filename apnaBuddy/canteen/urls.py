@@ -8,6 +8,5 @@ urlpatterns = [
 	path('logout/', views.canteen_logout, name='canteen-logout'),
 	path('orders/', views.orders, name='canteen-orders'),
 	path('history/', views.history, name='canteen-history'),
-
-
+	path('bill/', views.bill, name='canteen-bill'),
 ]
