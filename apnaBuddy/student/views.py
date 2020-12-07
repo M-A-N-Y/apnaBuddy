@@ -9,7 +9,8 @@ from .models import *
 # Create your views here.
 def index(request):
 	student = Student.objects.get(user=request.user)
-	context = {'student':student}
+	portfolio = Portfolio.objects.get(student=student)
+	context = {'student':student,'portfolio':portfolio}
 	#print(context)
 	return render(request, 'student/index.html', context)
 	# return render(request, 'student/index.html')
