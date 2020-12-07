@@ -51,8 +51,6 @@ def payment(request,pk):
     user = request.user
     student = Student.objects.get(user=request.user)
     event = Events.objects.get(id=pk)
-    # if event.paid.objects.get(student=student) is not None:
-    #     output = 'You are already registered!!'
     if (student.spitcoin - event.cost>0) :
         event.name.balance += event.cost
         student.spitcoin -= event.cost

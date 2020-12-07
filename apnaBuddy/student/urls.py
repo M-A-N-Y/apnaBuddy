@@ -15,6 +15,6 @@ urlpatterns = [
 	# path('library/', views.library, name='student-library'),
 	# path('events/', views.events, name='events'),
 	# path('vclass/', views.vclass, name='student-vclass'),
-	# path('feedback/', views.feedback, name='student-feedback'),
+	path('feedback/', views.feedback, name='student-feedback'),
 	#path('/', views., name=''),
 ]

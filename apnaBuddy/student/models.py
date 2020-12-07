@@ -102,6 +102,7 @@ class Subject(models.Model):
 
 class Feedback(models.Model):
 	student = models.ForeignKey(Student, on_delete= models.SET_NULL, null=True)
+	subject = models.CharField(max_length=100, null=True,blank=True)
 	desc = models.TextField(null=True)
 	happy = models.BooleanField(null=True)
 	resolved = models.BooleanField(default=False)

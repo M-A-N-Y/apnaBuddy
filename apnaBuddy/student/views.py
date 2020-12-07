@@ -65,17 +65,14 @@ def academics(request):
 	return render(request,'student/academic.html',params)
 
 
-	# 	if user is not None:
-	# 		print("LOGIN Successful!!")
-	# 		login(request,user)
-	# 		messages.success(request,"Successfully Logged in")
-	# 		return render(request,'student/index.html')
-
-	# 	else:
-	# 		print("LOGIN nahi hua!!")
-	# 		messages.error(request,"Wrong credentials,Please try again !")
-	# 		return render(request,'student/login2.html')
-	# else:
-	# 	print("LOGIN kar!!")
-	# 	messages.success(request,"You need to login to access this")
-	# 	return render(request,'student/login2.html')
+def feedback(request):
+	if request.method =="POST":
+		username=request.POST
+		subject =request.POST.get('subject')
+		desc =request.POST.get('feedback')
+		student = Student.objects.get(user=request.user)
+		feedback = Feedback(student=student,subject=subject,desc=desc)
+		feedback.save()
+		return redirect("/student")
+	else:
+		return render(request,'student/feedback.html')
