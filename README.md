@@ -1,1 +1,2 @@
 # apnaBuddy
+In this project we have created a college website where a student can view their personal portfolios, which would include details like CGPA's as well as subject-wise attendance records. One can also order food from canteen online. This website also has a Lost and Found section, where students can upload pictures of lost items which they have found. Then the owners of the lost objects can then claim the item.
